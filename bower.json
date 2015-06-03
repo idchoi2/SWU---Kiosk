@@ -1,0 +1,13 @@
+{
+  "name": "SWU Kiosk",
+  "description": "SWU Kiosk",
+  "version": "0.9.1",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "jquery": "~2.1.3",
+    "angular": "~1.3.15",
+    "html5-boilerplate": "~5.1.0",
+    "malihu-custom-scrollbar-plugin": "~3.0.8"
+  }
+}

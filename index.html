@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html lang="en" ng-app="swuKioskApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en" ng-app="swuKioskApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en" ng-app="swuKioskApp" class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en" ng-app="swuKioskApp" class="no-js"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="서울여대 - 선배에게 묻는다. 무엇이 궁금하신가요?">
+    <meta name="viewport" content="width=device-width, user-scalable=no">
+    <meta name="author" content="Rebel9" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>서울여대 - 선배에게 묻는다. 무엇이 궁금하신가요?</title>
+
+
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="bower_components/html5-boilerplate/dist/css/normalize.css">
+    <link rel="stylesheet" href="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" href="vendor/css/style.css">
+    <!-- CSS -->
+
+
+
+    <script src="bower_components/html5-boilerplate/src/js/vendor/modernizr-2.8.3.min.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/malihu-custom-scrollbar-plugin/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="app.js"></script>
+    <script src="vendor/js/script.js"></script>
+
+
+
+</head>
+<body ng-controller="MainCtrl" ng-class="{'open' : isOpen}">
+    <div id="wrapper" >
+
+
+        <!-- 타이틀 -->
+        <div id="tit-main"></div>
+        <!-- 타이틀 -->
+
+
+
+        <!-- 질문 목록 -->
+        <div id="qsn-container">
+            <div class="qst-item" ng-repeat="qsn in qsnList" style="top: {{ qsn.posY }}px; left: {{ qsn.posX }}px;">
+                <a href="#" class="btn-qst" onclick="swu.openQsn(); return false;" ng-click="OpenVideo(qsn);"><img src="vendor/img/tit/tit-{{ qsn.titNo }}.png" title="{{ qsn.title }}" /></a>
+            </div>
+
+
+
+            <div id="qsn-btn-wrap">
+                <a href="#" class="btn btn-prev" id="btn-qsn-prev">Prev</a>
+                <a href="#" class="btn btn-next" id="btn-qsn-next">Next</a>
+            </div>
+
+        </div>
+        <!-- 질문 목록 -->
+
+
+
+        <!-- 영상 영역 -->
+        <div id="vod-wrapper" ng-class="{'open' : isOpen}">
+            <div id="btn-back-container">
+                <a href="#" onclick="swu.closeQsn(); return false;" ng-click="CloseVideo();" id="btn-back"><span>목록으로</span></a>
+            </div>
+            <div id="cnt-container">
+                <div id="cnt-header">
+                    <img src="vendor/img/tit/sub-tit-{{ titNo }}.png" title="{{ qsn.title }}" />
+                </div>
+                <div id="cnt-body">
+                    <video width="1280" height="720" id="video" ng-src="{{videoSrc}}" poster="/vendor/img/loading.gif" some-video video-current-time="currentTime"></video>
+                    <div id="vid-full-bar" ng-click="SeekVideo($event);"></div>
+                    <div id="vid-play-bar" ng-click="SeekVideo($event);" style="width: {{ videoWidth * currentTime / duration }}px;"></div>
+                </div>
+                <div id="cnt-footer">
+                    <div id="vid-controls">
+                        <a href="#" class="btn-video btn-toggle-play btn-pause" onclick="swu.togglePlay(this); return false;">TogglePlay</a>
+                        <a href="#" class="btn-video btn-stop" onclick="swu.stopPlay(); return false;">Stop</a>
+                        <a href="#" class="btn-video btn-prev" onclick="swu.changeVideo(); return false;" ng-class="{'disabled' : isPrevDisable}" ng-click="PrevVideo();">Prev Video</a>
+                        <a href="#" class="btn-video btn-next" onclick="swu.changeVideo(); return false;" ng-class="{'disabled' : isNextDisable}" ng-click="NextVideo();">Next Video</a>
+                    </div>
+                    <div id="vid-time">
+                        <span class="current">{{ currentTime | secondsToDateTime | date:'mm:ss'  }}</span> / {{ duration | secondsToDateTime | date:'mm:ss'  }}
+                    </div>
+
+                    <div id="vid-info">
+                        <div id="psn-info">
+                            <img src="vendor/img/ppl/ppl-{{ person }}.png" title="{{ qsn.title }}" />
+                        </div>
+                        <!--<div id="details">
+                            <span class="label">주제</span><span class="info">{{ cate }}</span>
+                            <span class="label" style="margin-left: 40px;">키워드</span><span class="info">{{ keyword }}</span>
+                        </div>-->
+                    </div>
+
+                </div>
+            </div>
+            <div id="list-container" ng-class="{'centered' : videoList.length < 7}" class="centered-{{videoList.length}}">
+                <div id="btn-scroll-up" onclick="swu.scrollUp(); return false;" ng-class="{'btn-up-ava' : videoList.length > 7}"></div>
+                <div id="btn-scroll-down" onclick="swu.scrollDown(); return false;" ng-class="{'btn-down-ava' : videoList.length > 7}"></div>
+                <div class="thumb" ng-repeat="video in videoList">
+                    <a href="#" onclick="swu.changeVideo(); return false;" ng-click="ChangeVideo(video, videoList, $index);" class="btn-thumb"><img src="vendor/img/thm/{{ video.psnNo }}{{ video.vodNo == videoNo ? '-active' : video.psnExt }}.jpg"/></a>
+                </div>
+            </div>
+        </div>
+        <!-- 영상 영역 -->
+
+
+    </div>
+</body>
+</html>
