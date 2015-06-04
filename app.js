@@ -1,13 +1,10 @@
-'use strict';
-
 // Declare app level module which depends on views, and components
 angular.module('swuKioskApp', [
 
-]).
-run(['$rootScope', function($rootScope) {
-
-}])
+])
 .controller('MainCtrl', ['$scope', '$sce', '$timeout', function($scope, $sce, $timeout) {
+
+        "use strict";
 
         $scope.isOpen = false;
         $scope.isPrevDisable = false;
@@ -117,7 +114,7 @@ run(['$rootScope', function($rootScope) {
          */
         $scope.ChangeVideo = function(vod, videoList, index) {
 
-            if(!$scope.loading && ($scope.videoNo != vod.vodNo)) {
+            if(!$scope.loading && ($scope.videoNo !== vod.vodNo)) {
                 var video = document.getElementById("video");
                 video.pause();
                 $scope.loading = true;
@@ -889,7 +886,7 @@ run(['$rootScope', function($rootScope) {
 
 
 }])
-.directive('someVideo', function ($window) {
+.directive('someVideo', function () {
     return{
         scope: {
             videoCurrentTime: "=videoCurrentTime"
@@ -899,7 +896,7 @@ run(['$rootScope', function($rootScope) {
             $scope.onTimeUpdate = function () {
                 $scope.videoCurrentTime = $element[0].currentTime;
                 $scope.$apply();
-            }
+            };
         },
         link: function (scope, elm) {
             scope.$watch('videoCurrentTime', function (newVar) {
@@ -908,7 +905,7 @@ run(['$rootScope', function($rootScope) {
             });
             elm.bind('timeupdate', scope.onTimeUpdate);
         }
-    }
+    };
 
 })
 .filter('secondsToDateTime', [function() {

@@ -45,16 +45,13 @@
         <!-- 질문 목록 -->
         <div id="qsn-container">
             <div class="qst-item" ng-repeat="qsn in qsnList" style="top: {{ qsn.posY }}px; left: {{ qsn.posX }}px;">
-                <a href="#" class="btn-qst" onclick="swu.openQsn(); return false;" ng-click="OpenVideo(qsn);"><img src="vendor/img/tit/tit-{{ qsn.titNo }}.png" title="{{ qsn.title }}" /></a>
+                <a href="#" class="btn-qst" onclick="swu.openQsn(); return false;" ng-click="OpenVideo(qsn);"><img src="vendor/img/tit/tit-{{ qsn.titNo }}.png" /></a>
             </div>
-
-
 
             <div id="qsn-btn-wrap">
                 <a href="#" class="btn btn-prev" id="btn-qsn-prev">Prev</a>
                 <a href="#" class="btn btn-next" id="btn-qsn-next">Next</a>
             </div>
-
         </div>
         <!-- 질문 목록 -->
 
@@ -67,7 +64,7 @@
             </div>
             <div id="cnt-container">
                 <div id="cnt-header">
-                    <img src="vendor/img/tit/sub-tit-{{ titNo }}.png" title="{{ qsn.title }}" />
+                    <img src="vendor/img/tit/sub-tit-{{ titNo }}.png" />
                 </div>
                 <div id="cnt-body">
                     <video width="1280" height="720" id="video" ng-src="{{videoSrc}}" poster="/vendor/img/loading.gif" some-video video-current-time="currentTime"></video>
@@ -87,7 +84,7 @@
 
                     <div id="vid-info">
                         <div id="psn-info">
-                            <img src="vendor/img/ppl/ppl-{{ person }}.png" title="{{ qsn.title }}" />
+                            <img src="vendor/img/ppl/ppl-{{ person }}.png" />
                         </div>
                         <!--<div id="details">
                             <span class="label">주제</span><span class="info">{{ cate }}</span>
@@ -109,5 +106,11 @@
 
 
     </div>
+
+
+
+    <div id="loading-wrap"></div>
+
+    <div id="btn-close" onclick="swu.forceClose();"></div>
 </body>
 </html>
