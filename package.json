@@ -1,6 +1,6 @@
 {
   "name": "SWUKiosk",
-  "version": "1.0.1",
+  "version": "1.0.0",
   "description": "서울여대 동영상 키오스크",
   "main": "app.js",
   "directories": {

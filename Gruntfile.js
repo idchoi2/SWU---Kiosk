@@ -41,7 +41,7 @@ module.exports = function(grunt) {
         concat : {
             dist : {
                 src : [
-                    'vendor/script.js',
+                    'vendor/js/script.js',
                     'app.js'
                 ],
                 dest: 'build/<%= pkg.name %>-<%= pkg.version %>.js'
