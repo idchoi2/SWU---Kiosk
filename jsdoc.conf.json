@@ -1,0 +1,17 @@
+// JSDOC config file
+{
+  "tags": {
+    "allowUnknownTags": true
+  },
+  "source": {
+    "include": ["vendor/js"],
+    "includePattern": ".+\\.js(doc)?$",
+    "excludePattern": "(^|\\/|\\\\)_"
+  },
+  "opts": {
+    "encoding": "utf8",
+    "destination": "docs",
+    "recurse": true,
+    "private": true
+  }
+}
